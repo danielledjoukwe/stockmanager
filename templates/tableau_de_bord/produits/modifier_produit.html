@@ -1,0 +1,52 @@
+<div class="modal fade" id="edit-product-modal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editProductModalLabel">Modifier un produit</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-product-form">
+                    <div class="mb-3">
+                        <label for="edit-product-id" class="form-label">ID du produit</label>
+                        <input type="text" id="edit-product-id" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-product-name" class="form-label">Nom du produit</label>
+                        <input type="text" id="edit-product-name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-product-category" class="form-label">Catégorie</label>
+                        <select id="edit-product-category" class="form-select" required>
+                            <option value="">Aucune</option>
+                            <option value="Groupe electrogene">Groupe electrogene</option>
+                            <option value="Moto pompe">Moto pompe</option>
+                            <option value="Pompe forage">Pompe forage</option>
+                            <option value="Supresseur">Supresseur</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-product-price" class="form-label">Prix</label>
+                        <input type="number" id="edit-product-price" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-product-quantity" class="form-label">Quantité</label>
+                        <input type="number" id="edit-product-quantity" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-product-status" class="form-label">Statut</label>
+                        <select id="edit-product-status" class="form-select" required>
+                            <option value="success">En stock</option>
+                            <option value="warning">Stock faible</option>
+                            <option value="danger">Rupture</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success" id="edit-save-btn">Mettre à jour</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gestion des Produits</h2>
+        <div class="d-flex mb-2 ">
+            <input type="text" class="form-control me-2" placeholder="Rechercher un produit...">
+            <button class="btn btn-primary" id="add-product-btn">+ Ajouter un produit</button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom du Produit</th>
+                    <th>Catégorie</th>
+                    <th>Quantité</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#V000</td>
+                    <td>Vackson</td>
+                    <td>Groupe electrogene</td>
+                    <td>0</td>
+                    <td><span class="status status-danger">Rupture</span></td>
+                    <td>
+                        <div class="d-flex">
+                            <div class="action-btn edit" data-product-id="V000"><i class="fa-solid fa-pen-to-square"></i></div>
+                            <div class="action-btn delete"><i class="fa-solid fa-trash"></i></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#M000</td>
+                    <td>Marco</td>
+                    <td>Groupe electrogene</td>
+                    <td>8</td>
+                    <td><span class="status status-warning">Stock faible</span></td>
+                    <td>
+                        <div class="d-flex">
+                            <div class="action-btn edit" data-product-id="M000"><i class="fa-solid fa-pen-to-square"></i></div>
+                            <div class="action-btn delete"><i class="fa-solid fa-trash"></i></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>#S000</td>
+                    <td>Saneyoo</td>
+                    <td>Groupe electrogene</td>
+                    <td>12</td>
+                    <td><span class="status status-success">En stock</span></td>
+                    <td>
+                        <div class="d-flex">
+                            <div class="action-btn edit" data-product-id="S000"><i class="fa-solid fa-pen-to-square"></i></div>
+                            <div class="action-btn delete"><i class="fa-solid fa-trash"></i></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

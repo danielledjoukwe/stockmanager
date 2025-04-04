@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockManager - Connexion</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-container">
+                    <div class="system-logo">
+                        <!-- Placeholder for logo -->
+                        <h1> <span style="color: rgb(0, 0, 0);">Stock</span><span style="color: #3498db;">Manager</span></h1>
+                    </div>
+                    
+                    <!-- Navigation tabs -->
+                    <ul class="nav nav-tabs mb-4" id="formTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-form" type="button" role="tab" aria-controls="login-form" aria-selected="true">Connexion</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-form" type="button" role="tab" aria-controls="register-form" aria-selected="false">Nouvelle inscription</button>
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab content -->
+                    <div class="tab-content" id="formTabsContent">
+                        <!-- Login Form -->
+                        <div class="tab-pane fade show active" id="login-form" role="tabpanel" aria-labelledby="login-tab">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginUsername" class="form-label">Identifiant</label>
+                                    <input type="text" class="form-control" id="loginUsername" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Mot de passe</label>
+                                    <input type="password" class="form-control" id="loginPassword" required>
+                                    <a href="#" class="forgot-password">Mot de passe oublié?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Connexion</button>
+                            </form>
+                            <div class="info-section mt-3">
+                                <p class="mb-0"><strong>Information :</strong> Connectez-vous avec vos identifiants pour accéder au système de gestion de stock.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Register Form -->
+                        <div class="tab-pane fade" id="register-form" role="tabpanel" aria-labelledby="register-tab">
+                            <form id="registerForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">Prénom</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Nom</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Identifiant</label>
+                                    <input type="text" class="form-control" id="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerEmail" class="form-label">Adresse email</label>
+                                    <input type="email" class="form-control" id="registerEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">Rôle</label>
+                                    <select class="form-select" id="role" required>
+                                        <option value="" selected disabled>Sélectionnez un rôle</option>
+                                        <option value="gestionnaire">Gestionnaire de stock</option>
+                                        <option value="administrateur">Administrateur</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Mot de passe</label>
+                                    <input type="password" class="form-control" id="registerPassword" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                </div>
+                                <div class="info-section mb-3">
+                                    <p class="mb-0"><strong>Note:</strong> Votre compte devra être approuvé par un administrateur avant de pouvoir accéder au système.</p>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Demander un compte</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Basic form validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Ici vous pouvez ajouter le code pour traiter la connexion
+            alert('Tentative de connexion au système de gestion de stock');
+            // Redirection vers le dashboard (à décommenter et modifier selon besoin)
+            // window.location.href = 'dashboard.html';
+        });
+        
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Vérification que les mots de passe correspondent
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Les mots de passe ne correspondent pas');
+                return;
+            }
+            
+            // Validation basique du mot de passe
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            
+            if (!passwordRegex.test(password)) {
+                alert('Le mot de passe ne respecte pas les exigences de sécurité');
+                return;
+            }
+            
+            // Ici vous pouvez ajouter le code pour traiter l'inscription
+            alert('Demande de compte envoyée! Un administrateur examinera votre demande.');
+        });
+    </script>
+</body>
+</html>

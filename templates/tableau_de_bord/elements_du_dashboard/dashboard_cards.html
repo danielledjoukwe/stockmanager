@@ -1,0 +1,58 @@
+<section class="dashboard mb-5">
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Total Produits</h5>
+                        <div class="card-icon"><i class="fa-solid fa-filter"></i></div>
+                    </div>
+                    <div class="card-value">{{total_produits}}</div>
+                    <div class="card-subtitle">+{{nouveaux_produits}} nouveaux ce mois</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Stock Faible</h5>
+                        <div class="card-icon" style="background-color: var(--warning);"><i class="fa-solid fa-exclamation"></i></div>
+                    </div>
+                    <div class="card-value">{{produits_stock_faible}}</div>
+                    <div class="card-subtitle">Produits à réapprovisionner</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Rupture de Stock</h5>
+                        <div class="card-icon" style="background-color: var(--danger);"><i class="fa-solid fa-xmark"></i></div>
+                    </div>
+                    <div class="card-value">{{produits_rupture}}</div>
+                    <div class="card-subtitle">Produits indisponibles</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Valeur du Stock</h5>
+                        <div class="card-icon" style="background-color: var(--secondary);"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    </div>
+                    <div class="card-value">{{valeur_stock}} FCF</div>
+                    <div class="card-subtitle">+5% depuis le mois dernier</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  
+

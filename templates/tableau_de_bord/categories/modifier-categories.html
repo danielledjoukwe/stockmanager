@@ -1,0 +1,45 @@
+<!-- The Modal -->
+<div class="modal" id="edit-category-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modifier la categorie</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form id="edit-category-form">
+                <div class="mb-3">
+                    <label class="form-label">Référence</label>
+                    <input type="text" class="form-control" id="edit-category-ref" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nom de la catégorie</label>
+                    <input type="text" class="form-control" id="edit-category-name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" id="edit-category-description" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Statut</label>
+                    <select class="form-select" id="edit-category-status">
+                        <option value="success">Actif</option>
+                        <option value="warning">Inactif</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockManager - Gestion de Stock</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        header {
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        
+        .dashboard .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+        }
+        
+        .card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0 10px;
+        }
+        
+        .card-subtitle {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: var(--success);
+        }
+        
+        .status-warning {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-danger {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .action-btn {
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 2px;
+        }
+        
+        .action-btn.edit {
+            color: var(--primary);
+        }
+        
+        .action-btn.delete {
+            color: var(--danger);
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        {% include "./includes/navbar.html" %}
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+    {% block content %}
+    <h3 class="bold">
+
+            Dashboard
+    
+    </h3>
+        <!-- Dashboard cards-->
+        {% include "./elements_du_dashboard/dashboard_cards.html" %}
+        <form  action="{% url 'tableau_bord_magasin'%}">
+            <button type="submit" class="btn btn-primary"  >Magasin</button>
+        </form>
+        <!-- Product Table tableau.html -->
+        {% include "./elements_du_dashboard/tableau.html" %}
+    {% endblock content %}
+
+
+
+        
+    </div>
+
+    <!-- Ajouter produit -->
+        {% include "./produits/ajouter_produit.html" %}
+
+    <!-- modifier produit -->
+        {% include "./produits/modifier_produit.html" %}
+
+    <!--supprimer produit -->
+        {% include "./produits/supprimer_produit.html" %}
+    
+
+
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Bootstrap components
+        const addProductModal = new bootstrap.Modal(document.getElementById('add-product-modal'));
+        const editProductModal = new bootstrap.Modal(document.getElementById('edit-product-modal'));
+        const deleteConfirmModal = new bootstrap.Modal(document.getElementById('delete-confirm-modal'));
+        
+        // Event listener for add product button
+        document.getElementById('add-product-btn').addEventListener('click', function() {
+            // Reset form
+            document.getElementById('add-product-form').reset();
+            // Show modal
+            addProductModal.show();
+        });
+
+        // Event listener for the save button in add modal
+        document.getElementById('add-save-btn').addEventListener('click', function() {
+            // Here we would normally handle form submission with validation
+            // For demo purposes, just show success message and close modal
+            addProductModal.hide();
+            
+            // Create a Bootstrap toast notification
+            const toastContainer = document.createElement('div');
+            toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
+            toastContainer.style.zIndex = '11';
+            
+            toastContainer.innerHTML = `
+                <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Produit ajouté avec succès!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toastContainer);
+            const toastElement = toastContainer.querySelector('.toast');
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            // Remove toast container after it's hidden
+            toastElement.addEventListener('hidden.bs.toast', function() {
+                document.body.removeChild(toastContainer);
+            });
+        });
+        
+        // Event listeners for edit buttons
+        document.querySelectorAll('.edit').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                
+                // Populate form with product data
+                // In a real app, this would fetch data from a database
+                document.getElementById('edit-product-id').value = `#${productId}`;
+                
+                // Example data based on the table rows
+                let productName, productCategory, productPrice, productQuantity, productStatus;
+                
+                switch(productId) {
+                    case 'V000':
+                        productName = 'Vackson';
+                        productCategory = 'Groupe electrogene';
+                        productPrice = 0;
+                        productQuantity = 0;
+                        productStatus = 'danger';
+                        break;
+                    case 'M000':
+                        productName = 'Marco';
+                        productCategory = 'Groupe electrogene';
+                        productPrice = 0;
+                        productQuantity = 8;
+                        productStatus = 'warning';
+                        break;
+                    case 'S000':
+                        productName = 'Saneyoo';
+                        productCategory = 'Groupe electrogene';
+                        productPrice = 0;
+                        productQuantity = 12;
+                        productStatus = 'success';
+                        break;
+                }
+                
+                document.getElementById('edit-product-name').value = productName;
+                document.getElementById('edit-product-category').value = productCategory;
+                document.getElementById('edit-product-price').value = productPrice;
+                document.getElementById('edit-product-quantity').value = productQuantity;
+                document.getElementById('edit-product-status').value = productStatus;
+                
+                // Show modal
+                editProductModal.show();
+            });
+        });
+        
+        // Event listener for the save button in edit modal
+        document.getElementById('edit-save-btn').addEventListener('click', function() {
+            // Here we would normally handle form submission with validation
+            // For demo purposes, just show success message and close modal
+            editProductModal.hide();
+            
+            // Create a Bootstrap toast notification
+            const toastContainer = document.createElement('div');
+            toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
+            toastContainer.style.zIndex = '11';
+            
+            toastContainer.innerHTML = `
+                <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Produit mis à jour avec succès!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toastContainer);
+            const toastElement = toastContainer.querySelector('.toast');
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            // Remove toast container after it's hidden
+            toastElement.addEventListener('hidden.bs.toast', function() {
+                document.body.removeChild(toastContainer);
+            });
+        });
+        
+        // Event listeners for delete buttons
+        document.querySelectorAll('.delete').forEach(button => {
+            button.addEventListener('click', function() {
+                // Get the closest row
+                const row = this.closest('tr');
+                
+                // Set up delete confirmation
+                document.getElementById('confirm-delete-btn').onclick = function() {
+                    // Here we would normally handle delete action with an API call
+                    // For demo purposes, just remove the row and show a message
+                    row.remove();
+                    deleteConfirmModal.hide();
+                    
+                    // Create a Bootstrap toast notification
+                    const toastContainer = document.createElement('div');
+                    toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
+                    toastContainer.style.zIndex = '11';
+                    
+                    toastContainer.innerHTML = `
+                        <div class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    Produit supprimé!
+                                </div>
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(toastContainer);
+                    const toastElement = toastContainer.querySelector('.toast');
+                    const toast = new bootstrap.Toast(toastElement);
+                    toast.show();
+                    
+                    // Remove toast container after it's hidden
+                    toastElement.addEventListener('hidden.bs.toast', function() {
+                        document.body.removeChild(toastContainer);
+                    });
+                };
+                
+                // Show confirmation modal
+                deleteConfirmModal.show();
+            });
+        });
+    </script>
+</body>
+</html>

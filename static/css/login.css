@@ -1,0 +1,61 @@
+body {
+    background-color: #f5f7fa;
+    padding-top: 50px;
+}
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.form-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+.system-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.system-logo img {
+    height: 80px;
+    width: auto;
+}
+.nav-tabs .nav-link {
+    color: #6c757d;
+    font-weight: 500;
+}
+.nav-tabs .nav-link.active {
+    color: #2c3e50;
+    font-weight: 600;
+}
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+.form-text {
+    font-size: 0.85rem;
+}
+.password-requirements {
+    margin-top: 15px;
+    font-size: 0.8rem;
+}
+.forgot-password {
+    font-size: 0.85rem;
+    text-align: right;
+    display: block;
+    margin-top: 10px;
+}
+.info-section {
+    background-color: #e8f4fd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
